@@ -98,6 +98,33 @@ li > .active {
 	margin-left: 10px !important;
 }
 
+/* SPEAKERS - Related */
+.sp-block {
+	border-left: 2px #D9DDDC solid;
+	padding-left: 15px;
+}
+
+.sp-year-h2 {
+	font-size: 3.2em;
+	font-weight: 100;
+}
+
+.sp-authors {
+	font-weight: 400;
+}
+
+.sp-authors .sp-author {
+	font-weight: 500;
+}
+
+.sp-congress {
+	font-weight: 100;
+}
+
+.sp-force-margin-left {
+	margin-left: 10px !important;
+}
+
 /* ACADEMIC - Related */
 .academic-year-h2, .student-h2 {
 	font-size: 3.2em;
@@ -122,6 +149,33 @@ li > .active {
 }
 
 .student-period {
+	font-weight: 100;
+}
+
+/* PERS - Related */
+.pers-year-h2, .pers-h2 {
+	font-size: 3.2em;
+	font-weight: 100;
+}
+
+.pers-block, .pers-block {
+	padding-left: 15px;
+}
+
+.pers-rol {
+	font-weight: 400;
+}
+
+.pers-year {
+	font-weight: 100;
+}
+
+.pers-mark {
+	font-weight: 400;
+	font-size: 1.1em;
+}
+
+.pers-period {
 	font-weight: 100;
 }
 

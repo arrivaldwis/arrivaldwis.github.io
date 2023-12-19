@@ -6,6 +6,8 @@ $('#conferencesContent').hide();
 $('#projectsContent').hide();
 $('#tutorialsContent').hide();
 $('#academicContent').hide();
+$('#speakersContent').hide();
+$('#persContent').hide();
 $('#particularContent').hide();
 /* Template
 $('#nameContent').hide();
@@ -44,16 +46,16 @@ $(document).ready(function(){
 		rel: 'stylesheet',
 		href: 'assets/css/light.css'
 	});
-	if (localStorage.theme == "dark") {
-		// Handle menu
-		$("link[href='assets/css/light.css']").remove();
-		$('<link>').appendTo('head').attr({
-			type: 'text/css', 
-			rel: 'stylesheet',
-			href: 'assets/css/dark.css'
-		});
-		$('#theme').empty().append("<i class='fa-duotone fa-lightbulb-slash'></i>");
-	}
+	// if (localStorage.theme == "dark") {
+	// 	// Handle menu
+	// 	$("link[href='assets/css/light.css']").remove();
+	// 	$('<link>').appendTo('head').attr({
+	// 		type: 'text/css', 
+	// 		rel: 'stylesheet',
+	// 		href: 'assets/css/dark.css'
+	// 	});
+	// 	$('#theme').empty().append("<i class='fa-duotone fa-lightbulb-slash'></i>");
+	// }
 	// Done because light is the one by default
 	if(localStorage.lan == "es") {
 		$('#lan img').attr("src","/assets/img/es_flag.webp");
@@ -127,6 +129,40 @@ $(document).ready(function(){
 
 			// Show current content
 			activateDiv('#tutorialsContent');
+		}
+	});
+
+	// Handle 'Academic' content
+	$('#pers').click(function(e) {
+
+		// If the div has already the class active, no need to reload the divs...
+		if(!$(e.target).hasClass('active')) {
+			// Update navbar
+			clearActiveLinks();
+			activateLink(e);
+
+			// Hide other contents
+			clearActiveDivs();
+
+			// Show current content
+			activateDiv('#persContent');
+		}
+	});
+
+	// Handle 'Academic' content
+	$('#speakers').click(function(e) {
+
+		// If the div has already the class active, no need to reload the divs...
+		if(!$(e.target).hasClass('active')) {
+			// Update navbar
+			clearActiveLinks();
+			activateLink(e);
+
+			// Hide other contents
+			clearActiveDivs();
+
+			// Show current content
+			activateDiv('#speakersContent');
 		}
 	});
 

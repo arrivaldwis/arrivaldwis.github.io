@@ -69,3 +69,12 @@ h1, h2, h3, h4, b {
 .academic-block {
 	border-left: 2px #22517d solid;
 }
+
+/* PERS RELATED */
+.pers-name {
+	color: #22517d;
+}
+
+.pers-block {
+	border-left: 2px #22517d solid;
+}
