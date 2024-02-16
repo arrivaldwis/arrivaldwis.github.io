@@ -12,8 +12,10 @@
 
 .horizontal-line {
     width: 100%;
-    height: 2px; /* Adjust height as needed */
-    background-color: black; /* Change color as needed */
+    height: 1px; /* Adjust height as needed */
+    background-color: grey; /* Change color as needed */
+	margin-top: 6px;
+	margin-bottom: 6px;
   }
 
 a {
