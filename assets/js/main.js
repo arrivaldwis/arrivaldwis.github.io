@@ -712,22 +712,30 @@ function generateCV() {
 		doc.text('2025', margin, yPosition);
 		yPosition += lineHeight;
 		doc.setFont('helvetica', 'normal');
+
+		// LLM Publication
+		const pub2025c = 'A. D. Sentosa, J. Widianto, "An Automated Multi-Model LLMs Peer-to-Peer Evaluation System for Data Science Competitions: A Mathematical and Empirical Analysis," June 2025. ';
+		const pub2025cLines = addWrappedText(pub2025c, margin, yPosition, pageWidth - 2 * margin - 25);
+		yPosition += pub2025cLines;
+		doc.setTextColor(0, 0, 255);
+		doc.setTextColor(0, 0, 0);
+		yPosition += 8;
 		
 		// IndoEduBERT Publication
-		const pub2025a = 'A. D. Sentosa, A. S. Prihatmanto, N. Lestari, D. Tresnawati, and A. Zakiah, "IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain," June 2025. ';
-		const pub2025aLines = addWrappedText(pub2025a, margin, yPosition, pageWidth - 2 * margin - 25);
+		const pub2025a = 'A. D. Sentosa, A. S. Prihatmanto, N. Lestari, D. Tresnawati, and A. Zakiah, "IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain," April 2025. ';
+		const pub2025aLines = addWrappedText(pub2025a, margin, yPosition, pageWidth - 2 * margin - 30);
 		yPosition += pub2025aLines;
 		doc.setTextColor(0, 0, 255);
-		doc.textWithLink('[PDF]', pageWidth - margin - 20, yPosition - 4, {url: '/assets/documents/IndoEduBERT.pdf'});
+		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: '/assets/documents/IndoEduBERT.pdf'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 8;
 		
 		// Dental Caries Publication
-		const pub2025b = 'Z. Iklima, T. M. Kadarina, K. S. Salamah, and A. D. Sentosa, "Real-time dental caries segmentation with an efficient Deformable U-Net (DU-Net) for teledentistry system," May 2025. ';
-		const pub2025bLines = addWrappedText(pub2025b, margin, yPosition, pageWidth - 2 * margin - 30);
+		const pub2025b = 'Z. Iklima, T. M. Kadarina, K. S. Salamah, and A. D. Sentosa, "Real-time dental caries segmentation with an efficient Deformable U-Net (DU-Net) for teledentistry system," February 2025. ';
+		const pub2025bLines = addWrappedText(pub2025b, margin, yPosition, pageWidth - 2 * margin - 35);
 		yPosition += pub2025bLines;
 		doc.setTextColor(0, 0, 255);
-		doc.textWithLink('[Abstract]', pageWidth - margin - 25, yPosition - 4, {url: 'https://publikasi.mercubuana.ac.id/index.php/sinergi/article/view/30234'});
+		doc.textWithLink('[Abstract]', pageWidth - margin - 30, yPosition - 4, {url: 'https://publikasi.mercubuana.ac.id/index.php/sinergi/article/view/30234'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 8;
 		
