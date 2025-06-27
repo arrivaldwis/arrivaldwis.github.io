@@ -27,6 +27,9 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 		<link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
 		<link rel="stylesheet" href="assets/css/main.css">
+		
+		<!-- PDF Generation -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 	</head>
 
@@ -81,6 +84,17 @@
 							</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link" id="projects" href="#" 
+								data-es="Proyectos" 
+								data-en="Projects">
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" id="experiences" href="#" 
+								data-en="Experiences">
+							</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link" id="pers" href="#" 
 								data-en="Press">
 							</a>
@@ -91,12 +105,6 @@
 								data-en="Private Lessons">
 							</a>
 						</li> -->
-						<li class="nav-item">
-							<a class="nav-link d-none" id="projects" href="#" 
-								data-es="Proyectos" 
-								data-en="Side Projects">
-							</a>
-						</li>
 						<li class="nav-item">
 							<a class="nav-link d-none" id="conferences" href="#" 
 								data-es="Conferencias" 
@@ -135,9 +143,21 @@
 					<div class="d-none" id="contadorVisitas"></div>
 
 					<p class="mb-4">
-						<!-- <span class="t-secondary" data-en="Ph.D. Artificial Intelligence Student at Institut Teknologi Bandung and Product Manager at "></span> <a href="https://www.govtechedu.id/" class="link-dark" target="_blank">GovTech Edu</a>. -->
-						<span class="t-secondary" data-en="Lecturer and Ph.D. Student at "></span><a href="https://stei.itb.ac.id/staf-dosen/arrival-dwi-sentosa/" class="link-dark" target="_blank">Institut Teknologi Bandung</a>.
+						<!-- <span class="t-secondary" data-en="Ph.D. Artificial Intelligence Student at Bandung Institute of Technology and Product Manager at "></span> <a href="https://www.govtechedu.id/" class="link-dark" target="_blank">GovTech Edu</a>. -->
+						<span class="t-secondary" data-en="Lecturer of Informatics at "></span><a href="https://stei.itb.ac.id/staf-dosen/arrival-dwi-sentosa/" class="link-dark" target="_blank">Bandung Institute of Technology</a>.
 					</p>
+
+					<div class="row mb-2">
+						<div class="col-1">
+							<i class="ai ai-cv" aria-hidden="true"></i>
+						</div>
+
+						<div class="col-10">
+							<a href="#" id="downloadCV" class="link-dark" data-en="Download CV">Download CV</a>
+						</div>
+					</div>
+
+					<br>
 					
 					<div class="row mb-2">
 						<div class="col-1">
@@ -147,24 +167,12 @@
 						<div class="col-10">
 							<span 
 								data-en="Bandung">
-							</span> 
-							<br/>
-							West Java, 
+							</span>, 
 							<span 
 								data-en="Indonesia">
 							</span>
 						</div>
 					</div>
-
-					<!-- <div class="row mb-2">
-						<div class="col-1">
-							<i class="ai ai-cv" aria-hidden="true"></i>
-						</div>
-
-						<div class="col-10">
-							<a href="assets/documents/ArrivalSentosaCV.pdf" class="link-dark" target="_blank" data-en="CV [Updated 12/2023]"></a>
-						</div>
-					</div> -->
 
 					<div class="row mb-2">
 						<div class="col-1">
@@ -228,11 +236,15 @@
 				</div>
 
 				<!-- About Me -->
-				<div class="col-md-8 offset-md-1 mb-5 active" id="aboutmeContent">
+				<div class="col-md-9 mb-5 active" id="aboutmeContent">
 					<div class="container">
 						<div class="row language">
 							<p class="mt-2 justify" 
-								data-en="Born in Bandung, Indonesia in 1997. In 2019 he obtained a degree in Computer Science from Beijing Institute of Technology with honorable mention for academic excellence. He then studied a master’s degree at Institut Teknologi Bandung obtaining a master’s degree in Intelligent Systems in Informatics and granted fully funded scholarship “Beasiswa Unggulan” by Indonesian Ministry of Education 2022. He participates in teaching activities from 2023. He has presented at national conferences and is proficient in both Bahasa, English and Chinese.">
+								data-en="Born in Bandung, Indonesia he is a computer scientist with a strong academic foundation and a growing research portfolio in AI. He earned his B.Sc. in Computer Science from Beijing Institute of Technology with top academic honors and a prestigious Extraordinary Award for the Best Academic Record. His undergraduate thesis featured a self-learning personal finance assistant that integrated mobile development with on-device machine learning.
+
+Pursuing deeper specialization, Arrival completed his M.Sc. in Intelligent Systems at Bandung Institute of Technology (ITB) under a full government scholarship (Beasiswa Unggulan). His master’s work focused on computer vision, combining deep-learning models with expert knowledge to forecast disease outbreaks in shrimp farming earning national recognition for applied AI innovation.
+
+Currently a lecturer at ITB, he teaches artificial intelligence, machine learning, statistics, and discrete mathematics, while also mentoring student research and leading discussions on Explainable AI and LLMs.">
 							</p>
 							
 							<h4 id="researchinterestsH4" class="mt-2" 
@@ -240,12 +252,25 @@
 							</h4>
 
 							<p class="mt-1"
-								data-en="Artificial Intelligence, Computer Vision, Applied AI, XAI, Neural Networks Architecture, however my focus on Spatio-temporal object detection, some implementation in public CCTV to recognized the criminal action and predict which places would be the next accident.">
+								data-en="Interested in building reliable, transparent AI systems for real-time decision-making in safety-critical environments. His research focuses on:
+
+[1] Spatio-Temporal Computer Vision: Developing models that can detect and predict events (e.g., accidents or threats) from video streams in real-time.
+
+[2] Explainable and Trustworthy AI: Embedding interpretable mechanisms (like counterfactual or concept-based explanations) into deep models to improve auditability.
+
+[3] Edge–Cloud AI Optimization: Designing efficient model-splitting strategies for running AI across resource-constrained edge devices and the cloud.
+
+His long-term goal is to advance practical and ethical AI for public safety and infrastructure, combining technical performance with transparency and human-centered design.">
 							</p>
 
 							<h4 id="honors-and-awards" class="mt-2" data-es="Premios y Distinciones" data-en="Honors and Awards"></h4>
 
 							<ul class="mt-1">
+
+								<li class="abme-honors-bullet mt-2">
+									<strong>🥇 The Rising Star Contributors</strong>, <span data-en="as AI/ML Instructor at Bangkit Academy by Google, GoTo, Traveloka"></span>
+									- Aug, 2024
+								</li>
 
 								<li class="abme-honors-bullet mt-2">
 									<strong>🥇 Tangsel ICT Awards</strong>, <span data-en="with an application of AI for shrimp disease detection"></span>
@@ -451,14 +476,14 @@
 
 
 				<!-- Education -->
-				<div class="col-md-8 offset-md-1 mb-5" id="educationContent">
+				<div class="col-md-9 mb-5" id="educationContent">
 					<div class="container">
 
 						<div class="row mt-3 language">
 							<h2 
 								data-en="M.Sc. in Intelligent Systems"></h2>
 							<div class="trnsf-thin"
-								data-en="Institut Teknologi Bandung, 2019-2022">
+								data-en="Bandung Institute of Technology, 2019-2022">
 							</div>
 
 							<p class="mt-1 justify"
@@ -510,10 +535,22 @@
 
 
 				<!-- Publications -->
-				<div class="col-md-8 offset-md-1 mb-5" id="publicationsContent">
+				<div class="col-md-9 mb-5" id="publicationsContent">
 					<div class="container">
 						<div class="row mt-2">
 							<h2 class="pub-year-h2">2025</h2>
+
+							<div class="pub-block">
+								<div class="lucida-console h5">IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain</div>
+								<div class="pub-authors mt-1"><span class="pub-author">Arrival Dwi Sentosa</span>, Ary Setijadi Prihatmanto, Nina Lestari, Dewi Tresnawati, Azizah Zakiah </div>
+								<div class="pub-congress">June 2025.</div>
+								<div class="mt-1">
+									<span class="pub-force-margin-left"> <i class="far fa-file-pdf"></i> <a href="assets/documents/IndoEduBERT.pdf" target="_blank" class="link-dark ">PDF</a> </span>
+								</div>
+							</div>
+
+							<hr	style="border: none;"/>
+							<hr	style="border: none;"/>
 
 							<div class="pub-block">
 								<div class="lucida-console h5">Real-time dental caries segmentation with an efficient Deformable U-Net (DU-Net) for teledentistry system</div>
@@ -565,7 +602,7 @@
 				</div>
 
 				<!-- Speakers -->
-				<div class="col-md-8 offset-md-1 mb-5" id="speakersContent">
+				<div class="col-md-9 mb-5" id="speakersContent">
 					<div class="container">
 
 						<div class="clickable mt-4 language">
@@ -831,7 +868,7 @@
 				</div>
 
 				<!-- Blog -->
-				<div class="col-md-8 offset-md-1 mb-5" id="tutorialsContent">
+				<div class="col-md-9 mb-5" id="tutorialsContent">
 					<div class="container">
 
 						<div class="clickable mt-4 language">
@@ -930,7 +967,7 @@
 				</div>
 
 				<!-- Teaching -->
-				<div class="col-md-8 offset-md-1 mb-5" id="academicContent">
+				<div class="col-md-9 mb-5" id="academicContent">
 					<div class="container ">
 						<div class="row mt-2">
 							<h2 class="academic-year-h2">2025</h2>
@@ -1057,8 +1094,375 @@
 					</div>
 				</div>
 
-				<!-- Pers -->
-				<div class="col-md-8 offset-md-1 mb-5" id="persContent">
+				<!-- Projects -->
+				<div class="col-md-9 mb-5" id="projectsContent">
+					<div class="container language">
+						<h4 class="mt-2 mb-4" data-en="Projects">Projects</h4>
+						
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead class="table-light">
+									<tr>
+										<th scope="col">Name</th>
+										<th scope="col">Description</th>
+										<th scope="col">Role</th>
+										<th scope="col">Technologies</th>
+										<th scope="col">Link</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><strong>AI School Recommendation System</strong></td>
+										<td>AI model including fine-tuning of embedding model and LLM specific for education domain in Indonesia, for create a recommendation system for school finding.</td>
+										<td>Research with Prototype</td>
+										<td><span class="badge bg-secondary me-1">Python</span><span class="badge bg-secondary me-1">OpenCV</span><span class="badge bg-secondary me-1">Keras</span><span class="badge bg-secondary me-1">Unsloth</span><span class="badge bg-secondary me-1">QLoRa</span><span class="badge bg-secondary me-1">Flask</span><span class="badge bg-secondary me-1">Deep Learning</span><span class="badge bg-secondary me-1">Transformers</span></td>
+										<td><a href="https://kitagapai.ai/" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fa fa-globe"></i> Website</a></td>
+									</tr>
+									<tr>
+										<td><strong>Shrimp White Spot Syndrome Virus Detection</strong></td>
+										<td>Computer Vision technology to detect a physical symptom of WSSV on shrimp to prevent the spreading of virus.</td>
+										<td>Research with Prototype</td>
+										<td><span class="badge bg-secondary me-1">Python</span><span class="badge bg-secondary me-1">OpenCV</span><span class="badge bg-secondary me-1">Keras</span><span class="badge bg-secondary me-1">Tensorflow</span><span class="badge bg-secondary me-1">Pandas</span><span class="badge bg-secondary me-1">Flask</span><span class="badge bg-secondary me-1">Deep Learning</span><span class="badge bg-secondary me-1">YOLO</span></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td><strong>Toxic Player Detection (NLP)</strong></td>
+										<td>A machine learning model to detect whether a Dota 2 player is toxic or not, based on recorded conversations in one game.</td>
+										<td>Research with Prototype</td>
+										<td><span class="badge bg-secondary me-1">Python</span><span class="badge bg-secondary me-1">Named Entity Recognition</span><span class="badge bg-secondary me-1">Keras</span><span class="badge bg-secondary me-1">Tensorflow</span><span class="badge bg-secondary me-1">Pandas</span><span class="badge bg-secondary me-1">Word Embedding</span></td>
+										<td><a href="https://github.com/arrivaldwis/DOTA2-ToxicPlayerDetection" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fab fa-github"></i> GitHub</a></td>
+									</tr>
+									<tr>
+										<td><strong>Shrimp (Larvae) Hatcheries Counting</strong></td>
+										<td>Computer Vision technology to counting a shrimp larva that have accuracy above 90% and capability to detect an overlap larvae.</td>
+										<td>Research with Prototype</td>
+										<td><span class="badge bg-secondary me-1">Python</span><span class="badge bg-secondary me-1">OpenCV</span><span class="badge bg-secondary me-1">Keras</span><span class="badge bg-secondary me-1">Tensorflow</span><span class="badge bg-secondary me-1">Pandas</span><span class="badge bg-secondary me-1">Flask</span></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td><strong>Indonesian Diaspora Connect</strong></td>
+										<td>Social media platform that acts as a facilitator between the Government and the best Indonesian talents all around the world.</td>
+										<td>Global Technology Lead (Mobile Developer)</td>
+										<td><span class="badge bg-secondary me-1">NoSQL</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">MVVM Pattern</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Navicat</span><span class="badge bg-secondary me-1">PHPStorm</span><span class="badge bg-secondary me-1">Fabric</span></td>
+										<td><a href="https://play.google.com/store/apps/details?id=com.id.connect.diaspora" target="_blank" class="btn btn-sm btn-outline-success"><i class="fab fa-google-play"></i> Play Store</a></td>
+									</tr>
+									<tr>
+										<td><strong>Custom C++ and Own Programming Language Compiler</strong></td>
+										<td>Designing and build a C++ and own programming language with the compiler for research purpose.</td>
+										<td>Research</td>
+										<td><span class="badge bg-secondary me-1">MARS</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">C++</span><span class="badge bg-secondary me-1">YAML</span><span class="badge bg-secondary me-1">Assembly</span></td>
+										<td><a href="https://github.com/arrivaldwis/BIT-MiniCC" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fab fa-github"></i> GitHub</a></td>
+									</tr>
+									<tr>
+										<td><strong>IoT of Shrimp Autofeeder with Controller Apps</strong></td>
+										<td>Designing and build an autofeeder for shrimp that integrated with mobile apps for monitoring and controlling amount of feed give to the pond.</td>
+										<td>Research</td>
+										<td><span class="badge bg-secondary me-1">C++</span><span class="badge bg-secondary me-1">Arduino</span><span class="badge bg-secondary me-1">PostgreSQL</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">Firebase</span><span class="badge bg-secondary me-1">Realm</span></td>
+										<td><a href="https://github.com/arrivaldwis/SGFeed" target="_blank" class="btn btn-sm btn-outline-primary"><i class="fab fa-github"></i> GitHub</a></td>
+									</tr>
+									<tr>
+										<td><strong>Museek</strong></td>
+										<td>Discover music around your location and suggest best music for you</td>
+										<td>Android Developer</td>
+										<td><span class="badge bg-secondary me-1">NoSQL</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">MVC Pattern</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Firebase</span><span class="badge bg-secondary me-1">Fabric</span><span class="badge bg-secondary me-1">Realm</span></td>
+										<td><a href="https://play.google.com/store/apps/details?id=id.odt.museek" target="_blank" class="btn btn-sm btn-outline-success"><i class="fab fa-google-play"></i> Play Store</a></td>
+									</tr>
+									<tr>
+										<td><strong>UangKu</strong></td>
+										<td>UangKu is personal finance management apps to help manage user cashflow</td>
+										<td>Android Developer</td>
+										<td><span class="badge bg-secondary me-1">SQLite</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">MVC Pattern</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Fabric</span></td>
+										<td><a href="https://play.google.com/store/apps/details?id=odt.aliqornan.uangku" target="_blank" class="btn btn-sm btn-outline-success"><i class="fab fa-google-play"></i> Play Store</a></td>
+									</tr>
+									<tr>
+										<td><strong>Mona</strong></td>
+										<td>The best personal finance manager and expense tracker.</td>
+										<td>AI and Mobile Developer</td>
+										<td><span class="badge bg-secondary me-1">NoSQL</span><span class="badge bg-secondary me-1">Realm</span><span class="badge bg-secondary me-1">Firebase</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Kotlin</span><span class="badge bg-secondary me-1">MVVM Pattern</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Intent Classification</span><span class="badge bg-secondary me-1">Entity Extraction</span></td>
+										<td>-</td>
+									</tr>
+									<tr>
+										<td><strong>PPI Tiongkok</strong></td>
+										<td>PPIT Mobile Apps is an application for Indonesia Student or who will come and study in RRC, this apps include all about information and activities of Indonesian Student and also a community.</td>
+										<td>Project Manager</td>
+										<td><span class="badge bg-secondary me-1">NoSQL</span><span class="badge bg-secondary me-1">Flutter</span><span class="badge bg-secondary me-1">Dart</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">MVC Pattern</span></td>
+										<td><a href="https://play.google.com/store/apps/details?id=id.ppit.mobile" target="_blank" class="btn btn-sm btn-outline-success"><i class="fab fa-google-play"></i> Play Store</a></td>
+									</tr>
+									<tr>
+										<td><strong>iWatchYou</strong></td>
+										<td>iWatchYou is a Tools to Monitoring Children Activity when using a Computer</td>
+										<td>Android and Desktop Developer</td>
+										<td><span class="badge bg-secondary me-1">NoSQL</span><span class="badge bg-secondary me-1">SQLite</span><span class="badge bg-secondary me-1">Android</span><span class="badge bg-secondary me-1">Java</span><span class="badge bg-secondary me-1">Android Studio</span><span class="badge bg-secondary me-1">Javascript</span><span class="badge bg-secondary me-1">Firebase</span><span class="badge bg-secondary me-1">PHP</span><span class="badge bg-secondary me-1">AngularJS</span><span class="badge bg-secondary me-1">Socket.io</span></td>
+										<td>-</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+			</div>
+
+			<!-- Experiences -->
+			<div class="col-md-9 mb-5" id="experiencesContent">
+				<div class="container language">
+					<h4 class="mt-2 mb-4" data-en="Work Experience">Work Experience</h4>
+					
+					<div class="timeline">
+						<!-- Bandung Institute of Technology -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-primary">July 2023 –
+Now</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Lecturer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="http://www.itb.ac.id/" target="_blank" class="text-decoration-none">Bandung Institute of Technology</a></h6>
+										<p class="mb-2"><em>School of Electrical Engineering and Informatics</em></p>
+										<p class="mb-0">Being an Informatics lecturer at ITB, Research group Informatics. Lecturing for Informatics undergraduate students.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Neuronworks -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-primary">April 2024 –
+Now</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Coordinator of AI Development</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://neuronworks.ac.id/" target="_blank" class="text-decoration-none">PT Neuronworks Indonesia</a></h6>
+										<p class="mb-2"><em>Research and Technology</em></p>
+										<p class="mb-0">Being an coordinator of AI Development, focusing on AI/ML research, development, and application.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- SL2 -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">February 2024 –
+May 2024</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Tech and AI Lead</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://www.sustainablelivinglab.org/" target="_blank" class="text-decoration-none">Sustainable Living Lab</a></h6>
+										<p class="mb-2"><em>AI Team</em></p>
+										<p class="mb-0">Being an tech and AI Lead, focusing on AI/ML research, development, and application. Handle two projects that focusing on RAGs development system for domain specific needs.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Universitas Multimedia Nusantara -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">April 2022 –
+May 2023</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Part-Time Lecturer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="http://www.umn.ac.id/" target="_blank" class="text-decoration-none">Universitas Multimedia Nusantara</a></h6>
+										<p class="mb-2"><em>Fakultas Teknik dan Informatika</em></p>
+										<p class="mb-0">Being part-time lecturer at Multimedia Nusantara University, Faculty of Informatics and Engineering, Department Informatics. Lecturing 4 subjects including (Expert System, Artificial Intelligence, Algorithm and Data Structure and Deep Learning) for undergraduate students.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Kementerian Pendidikan dan Kebudayaan -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">February 2022 –
+December 2022</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Manager of Data and Information Kampus Merdeka</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://kampusmerdeka.kemdikbud.go.id/" target="_blank" class="text-decoration-none">Kementerian Pendidikan dan Kebudayaan</a></h6>
+										<p class="mb-0">As Product Manager of 4 different program in Ministry Education initiative (Praktisi Mengajar, Kampus Mengajar, Cerita Kampus Merdeka, IISMA). Managing relationships with stakeholders (program team) and the developer team to fulfilled the needs of system each program, starting from initial project, brainstorming, developing PRD, product prioritization, assign backlog items for developers and monitoring daily basis to ensure development still on track. Lastly, do analytics and exploring data metrics that generates from the platform using some analytics tools like Amplitude, Google Analytics and Umami to get an insight of next development/improvements.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- PT Transformasi Digital Laut -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">July 2017 –
+August 2022</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Co-Founder and CTO</strong></h5>
+										<h6 class="text-muted mb-2"><a href="http://www.sgara.id/" target="_blank" class="text-decoration-none">PT Transformasi Digital Laut</a></h6>
+										<p class="mb-0">Building the tech infrastructure from the scratch for an aquaculture startup focusing on Shrimp Farming called "Sgara", bridging the stakeholders needs to tech, designing the infrastructure, research and defining best technology, managing the tech team consists of 5 members, direct responsible to CEO. With very efficient team proudly we've been built more than 5 platform (SgaraBook, SgaraHub, SgaraHatchery, SgaraSupply, SgaraERP, etc.)</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- VE Capital Asia Pte Ltd -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">June 2020 –
+September 2020</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Senior Mobile Developer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://vecapital.asia/" target="_blank" class="text-decoration-none">VE Capital Asia Pte Ltd</a></h6>
+										<p class="mb-0">As a mobile developer, build some of projects for android and ios with such of newest frameworks/technology like Flutter, React and Go and deliver it as soon as possible to the clients. Working with small team (3 member, including product manager) we've been successfully built 3 apps for client in 3 months.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Indonesia Diaspora Connect -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">September 2017 –
+January 2020</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Co-Founder and Global Lead Technology</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://www.diasporaconnect.id/" target="_blank" class="text-decoration-none">Indonesia Diaspora Connect</a></h6>
+										<p class="mb-0">As a Co-Founder and CTO at the beginning, I've responsibility to building all tech from scratch. Indonesia Diaspora Connect (IDC) is a social apps for Indonesian abroad to communicate and sharing, we've been built the platform for Web, Android and iOS in 4-month development with 3 members of tech teams. Also, we got some achievement for this innovation, one of the best as the 1st Winner Alcatel Lucent Hackathon 2018.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Perhimpunan Pelajar Indonesia Tiongkok -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">June 2018 –
+June 2019</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Deputy Director of Media and Technology</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://ppitiongkok.org/" target="_blank" class="text-decoration-none">Perhimpunan Pelajar Indonesia Tiongkok</a></h6>
+										<p class="mb-0">Indonesian student community in China (PPIT) is a non-profit organization that gathers all Indonesian student that studying in China, we build the social channel and platform to giving any information needed by Indonesian students especially from the embassy. We successfully built "One data portal" for Indonesian students in China to help them find and share all information needed, the platform built with 2 members including me as Developer in 1 months.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- MEKAR.ID -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">September 2017 –
+January 2018</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Android Developer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://www.mekar.id/" target="_blank" class="text-decoration-none">MEKAR.ID</a></h6>
+										<p class="mb-0">Building the Peer-to-Peer Lending Apps called "MEKAR" an initiative program from Sampoerna. I was responsible to build the android apps that implementing such tools like Firebase, Firestore, MVVM, Dagger and Retrofit.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- PT. Iman Teknologi Informasi -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">May 2015 –
+July 2015</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Android Developer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="https://www.xecureit.com/" target="_blank" class="text-decoration-none">PT. Iman Teknologi Informasi</a></h6>
+										<p class="mb-0">Building android apps of secure end-to-end encryption chat apps called "PesanKita" now changed to "Palapa". Based on telegram and moved to Signal infrastructure with some addition such as user experience improvements.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- PT. GITS Indonesia -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">July –
+September 2014</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Android & iOS Developer</strong></h5>
+										<h6 class="text-muted mb-2"><a href="http://gits.co.id/" target="_blank" class="text-decoration-none">PT. GITS Indonesia</a></h6>
+										<p class="mb-0">Building an iOS and Android apps with native technology, using Java for Android and Objective-C for iOS back then. Initiate to exploring Swift and Kotlin in beta, I've been handling some projects for example registration part of Tiket.com.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Yoqiza Interactive -->
+						<div class="timeline-item mb-4">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="timeline-date">
+										<span class="badge bg-secondary">October –
+November 2013</span>
+									</div>
+								</div>
+								<div class="col-md-9">
+									<div class="timeline-content">
+										<h5 class="mb-2"><strong>Web Developer – Back End Laravel Framework</strong></h5>
+										<h6 class="text-muted mb-2"><a href="http://jarvis-store.com/" target="_blank" class="text-decoration-none">Yoqiza Interactive</a></h6>
+										<p class="mb-0">Building an Back-end for startup e-commerce using Laravel 4, focusing in part of transactions.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Pers -->
+			<div class="col-md-8 mb-5" id="persContent">
 					<div class="container">
 						
 						<div class="row mt-4">
@@ -1320,7 +1724,7 @@
 				</div>
 
 				<!-- Conferences -->
-				<div class="col-md-8 offset-md-1 mb-5" id="conferencesContent">
+				<div class="col-md-8 mb-5" id="conferencesContent">
 					<div class="container language">
 						⚠️ 
 						<span 
@@ -1332,19 +1736,7 @@
 				</div>
 
 				<!-- Experience -->
-				<div class="col-md-8 offset-md-1" id="experienceContent">
-					<div class="container language">
-						⚠️ 
-						<span 
-							data-es="Estamos trabajando en ello..."
-							data-en="Work in progress...">
-						</span>
-						⏱️
-						</div>
-				</div>
-
-				<!-- Projects -->
-				<div class="col-md-8 offset-md-1" id="projectsContent">
+				<div class="col-md-8" id="experienceContent">
 					<div class="container language">
 						⚠️ 
 						<span 
@@ -1357,7 +1749,7 @@
 
 				<!-- Template -->
 				<!--
-				<div class="col-md-8 offset-md-1" id="nameContent">
+				<div class="col-md-8" id="nameContent">
 					<div class="container language">
 					⚠️ 
 					<span 
@@ -1378,6 +1770,8 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 		<script src="assets/js/main.js"></script>
 	</body>
 
