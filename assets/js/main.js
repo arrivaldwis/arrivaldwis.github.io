@@ -592,11 +592,18 @@ function generateCV() {
 				description: 'Being an coordinator of AI Development, focusing on AI/ML research, development, and application.'
 			},
 			{
+				title: 'National Jury Team for WorldSkills Indonesia',
+				company: 'WorldSkills Indonesia',
+				period: 'January 2023 – Now',
+				department: 'Field: IT Software Solution for Business',
+				description: 'Being an jury team for WorldSkills competition, focusing on IT solutions for business. Responsible for jury team including preparing competitor by creating a problem statement, developing a solution, and presenting the solution. Following WorldSkills International standard'
+			},
+			{
 				title: 'Tech and AI Lead',
 				company: 'Sustainable Living Lab',
 				period: 'February 2024 – May 2024',
 				department: 'AI Team',
-				description: 'Being an tech and AI Lead, focusing on AI/ML research, development, and application. Handle two projects that focusing on RAGs development system for domain specific needs.'
+				description: 'Led the research and development of two domain-specific Retrieval-Augmented Generation (RAG) systems focused on sustainability. I architected end-to-end RAG pipelines—integrating vector databases, and LLM orchestration using LangChain and FastAPI. To ensure transparency, I implemented explainability features such as source tracing, and conducted stakeholder workshops to structure domain knowledge efficiently. I also mentored junior engineers, contributing to team growth and knowledge transfer. The resulting helped establish SL2’s AI consulting capability.'
 			},
 			{
 				title: 'Part-Time Lecturer',
@@ -793,8 +800,8 @@ function generateCV() {
 		yPosition += lineHeight;
 		doc.text('• IF2123 Linear Algebra & Geometry', margin + 5, yPosition);
 		yPosition += lineHeight;
-		doc.text('• IF3070 Fundamental of Artificial Intelligence', margin + 5, yPosition);
-		yPosition += lineHeight;
+		yPosition += addWrappedText('• IF3070 Fundamental of Artificial Intelligence', margin + 5, yPosition, pageWidth - 2 * margin - 10);
+		yPosition += 2;
 		doc.text('• WI1102 Computational Thinking', margin + 5, yPosition);
 		yPosition += lineHeight;
 		doc.text('• WI1116 Computer Interaction Lab', margin + 5, yPosition);
@@ -808,8 +815,8 @@ function generateCV() {
 		yPosition += lineHeight;
 		doc.text('• II1101 Computing and Society', margin + 5, yPosition);
 		yPosition += lineHeight;
-		doc.text('• II2220 Resource Management for Information Technology System', margin + 5, yPosition);
-		yPosition += lineHeight;
+		yPosition += addWrappedText('• II2220 Resource Management for Information Technology System', margin + 5, yPosition, pageWidth - 2 * margin - 10);
+		yPosition += 2;
 		doc.text('• IF3270 Machine Learning', margin + 5, yPosition);
 		yPosition += lineHeight;
 		doc.text('• IF1210 Fundamental Programming', margin + 5, yPosition);
@@ -830,6 +837,7 @@ function generateCV() {
 		yPosition += 8;
 		
 		// 2022 Teaching
+		checkPageBreak(80);
 		doc.setFont('helvetica', 'bold');
 		doc.text('2022 - Multimedia Nusantara University', margin, yPosition);
 		yPosition += lineHeight;
@@ -838,7 +846,7 @@ function generateCV() {
 		yPosition += lineHeight;
 		doc.text('• IF232 Algorithm and Data Structures', margin + 5, yPosition);
 		yPosition += lineHeight;
-		doc.text('• IF541 Introduction to Expert Systems', margin + 5, yPosition);
+		yPosition += addWrappedText('• IF541 Introduction to Expert Systems', margin + 5, yPosition, pageWidth - 2 * margin - 10);
 		yPosition += 10;
 		
 		// Honors and Awards
