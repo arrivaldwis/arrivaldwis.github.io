@@ -538,6 +538,19 @@ function generateCV() {
 		checkPageBreak(40);
 		addSectionTitle('Education');
 		
+		// PhD Degree
+		doc.setFontSize(12);
+		doc.setFont('helvetica', 'bold');
+		doc.text('Ph.D. in Artificial Intelligence', margin, yPosition);
+		yPosition += lineHeight;
+		doc.setFontSize(10);
+		doc.setFont('helvetica', 'normal');
+		doc.text('Seoul National University, 2025 - Now', margin, yPosition);
+		yPosition += lineHeight;
+		const phdDesc = 'Focusing on developing reliable, transparent, and trustworthy AI systems. Research areas include explainable AI, AI safety, robustness, and ethical AI deployment in real-world applications. Working on advancing the theoretical foundations and practical implementations of trustworthy artificial intelligence.';
+		yPosition += addWrappedText(phdDesc, margin, yPosition, pageWidth - 2 * margin);
+		yPosition += lineHeight - 1;
+		
 		// Master's Degree
 		doc.setFontSize(12);
 		doc.setFont('helvetica', 'bold');
@@ -907,6 +920,9 @@ function generateCV() {
 			],
 			'2024': [
 				'The Rising Star Contributors - as AI/ML Instructor at Bangkit Academy by Google, GoTo, Traveloka (Aug)'
+			],
+			'2025': [
+				'SNU President Fellowships Awardee - for the doctoral program (Fall 2025)'
 			]
 		};
 		
