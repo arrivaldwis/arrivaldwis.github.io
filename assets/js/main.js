@@ -1099,6 +1099,12 @@ function generateCV() {
 		
 		const talksWithLinks = [
 			{
+				title: 'Dari Data ke Publikasi: Memaksimalkan AI dalam pembuatan Artikel Ilmiah Inovatif',
+				organization: 'ISBI Bandung',
+				date: 'Aug 14, 2025',
+				url: 'https://www.canva.com/design/DAGv297w7yI/wtVg8RAs1OR1FYix8Zr43A/edit?utm_content=DAGv297w7yI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton'
+			},
+			{
 				title: 'Hands-on Large Language Model, RAG and Agent with Deep Doc Analysis',
 				organization: 'Solusi Intek Indonesia',
 				date: 'Nov 23, 2024',
