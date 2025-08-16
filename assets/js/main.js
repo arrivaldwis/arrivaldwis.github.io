@@ -734,7 +734,7 @@ function generateCV() {
 		doc.setFont('helvetica', 'normal');
 
 		// LLM Publication
-		const pub2025c = 'A. D. Sentosa, J. Widianto, "An Automated Multi-Model LLMs Peer-to-Peer Evaluation System for Data Science Competitions: A Mathematical and Empirical Analysis," June 2025. ';
+		const pub2025c = 'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation in Automated Evaluation Systems," June 2025. ';
 		const pub2025cLines = addWrappedText(pub2025c, margin, yPosition, pageWidth - 2 * margin - 25);
 		yPosition += pub2025cLines;
 		doc.setTextColor(0, 0, 255);
