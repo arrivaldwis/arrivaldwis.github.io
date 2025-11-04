@@ -511,7 +511,7 @@ function generateCV() {
 		yPosition += lineHeight;
 		doc.text('LinkedIn: linkedin.com/in/arrivaldwisentosa', margin, yPosition);
 		yPosition += lineHeight;
-		doc.text('GitHub: github.com/arrivaldwis', margin, yPosition);
+		doc.text('Personal Page: arrivaldwis.github.io', margin, yPosition);
 		yPosition += 10;
 		
 		// Background Information
