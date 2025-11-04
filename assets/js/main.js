@@ -538,19 +538,6 @@ function generateCV() {
 		checkPageBreak(40);
 		addSectionTitle('Education');
 		
-		// PhD Degree
-		doc.setFontSize(12);
-		doc.setFont('helvetica', 'bold');
-		doc.text('Ph.D. in Artificial Intelligence', margin, yPosition);
-		yPosition += lineHeight;
-		doc.setFontSize(10);
-		doc.setFont('helvetica', 'normal');
-		doc.text('Seoul National University, 2025 - Now', margin, yPosition);
-		yPosition += lineHeight;
-		const phdDesc = 'Focusing on developing reliable, transparent, and trustworthy AI systems. Research areas include explainable AI, AI safety, robustness, and ethical AI deployment in real-world applications. Working on advancing the theoretical foundations and practical implementations of trustworthy artificial intelligence.';
-		yPosition += addWrappedText(phdDesc, margin, yPosition, pageWidth - 2 * margin);
-		yPosition += lineHeight - 1;
-		
 		// Master's Degree
 		doc.setFontSize(12);
 		doc.setFont('helvetica', 'bold');
@@ -734,7 +721,7 @@ function generateCV() {
 		doc.setFont('helvetica', 'normal');
 
 		// LLM Publication
-		const pub2025c = 'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation in Automated Evaluation Systems," June 2025. ';
+		const pub2025c = 'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation in Automated Evaluation Systems," Accepted at International Conference on Electrical Engineering and Informatiocs (https://ftsm.ukm.my/iceei2025/) at November 2025. ';
 		const pub2025cLines = addWrappedText(pub2025c, margin, yPosition, pageWidth - 2 * margin - 25);
 		yPosition += pub2025cLines;
 		doc.setTextColor(0, 0, 255);
@@ -742,7 +729,7 @@ function generateCV() {
 		yPosition += 8;
 		
 		// IndoEduBERT Publication
-		const pub2025a = 'A. D. Sentosa, A. S. Prihatmanto, N. Lestari, D. Tresnawati, and A. Zakiah, "IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain," April 2025. ';
+		const pub2025a = 'A. D. Sentosa, A. S. Prihatmanto, N. Lestari, D. Tresnawati, and A. Zakiah, "IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain," Accepted at International Conference on Electrical Engineering and Informatiocs (https://ftsm.ukm.my/iceei2025/) at November 2025. ';
 		const pub2025aLines = addWrappedText(pub2025a, margin, yPosition, pageWidth - 2 * margin - 30);
 		yPosition += pub2025aLines;
 		doc.setTextColor(0, 0, 255);
@@ -920,9 +907,6 @@ function generateCV() {
 			],
 			'2024': [
 				'The Rising Star Contributors - as AI/ML Instructor at Bangkit Academy by Google, GoTo, Traveloka (Aug)'
-			],
-			'2025': [
-				'SNU President Fellowships Awardee - for the doctoral program (Fall 2025)'
 			]
 		};
 		
