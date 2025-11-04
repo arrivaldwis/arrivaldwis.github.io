@@ -725,6 +725,7 @@ function generateCV() {
 		const pub2025cLines = addWrappedText(pub2025c, margin, yPosition, pageWidth - 2 * margin - 25);
 		yPosition += pub2025cLines;
 		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: '/assets/documents/MACS.pdf'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 8;
 		
