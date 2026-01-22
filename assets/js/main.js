@@ -725,7 +725,7 @@ function generateCV() {
 		const pub2025cLines = addWrappedText(pub2025c, margin, yPosition, pageWidth - 2 * margin - 25);
 		yPosition += pub2025cLines;
 		doc.setTextColor(0, 0, 255);
-		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: '/assets/documents/MACS.pdf'});
+		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: 'https://ieeexplore.ieee.org/document/11331239'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 8;
 		
@@ -734,7 +734,7 @@ function generateCV() {
 		const pub2025aLines = addWrappedText(pub2025a, margin, yPosition, pageWidth - 2 * margin - 30);
 		yPosition += pub2025aLines;
 		doc.setTextColor(0, 0, 255);
-		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: '/assets/documents/IndoEduBERT.pdf'});
+		doc.textWithLink('[PDF]', pageWidth - margin - 25, yPosition - 4, {url: 'https://ieeexplore.ieee.org/document/11330949'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 8;
 		
