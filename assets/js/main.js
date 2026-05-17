@@ -712,6 +712,36 @@ function generateCV() {
 		checkPageBreak(40);
 		addSectionTitle('Publications');
 		
+		// 2026 Publications (In Review)
+		checkPageBreak(50);
+		doc.setFontSize(10);
+		doc.setFont('helvetica', 'bold');
+		doc.text('2026', margin, yPosition);
+		yPosition += lineHeight;
+		doc.setFont('helvetica', 'normal');
+
+		// FuseRAG Publication
+		const pub2026b = 'A. D. Sentosa, "FuseRAG: Parallel Multi-Source Knowledge Fusion for Hybrid Graph-Augmented Retrieval-Augmented Generation," May 2026.';
+		const pub2026bLines = addWrappedText(pub2026b, margin, yPosition, pageWidth - 2 * margin);
+		yPosition += pub2026bLines;
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('[Abstract]', margin, yPosition, {url: 'https://arrivaldwis.github.io/assets/documents/FuseRAG__Parallel_Multi_Source_Knowledge_Fusion_for_Hybrid_Graph_Augmented_Retrieval_Augmented_Generation.pdf'});
+		doc.setTextColor(150, 150, 150);
+		doc.text('[In review]', margin + 28, yPosition);
+		doc.setTextColor(0, 0, 0);
+		yPosition += lineHeight + 4;
+
+		// PRISM Publication
+		const pub2026a = 'A. D. Sentosa, A. D. Kusumah, J. Widianto, and H. H. Putri, "PRISM: Personalized Retrieval via Implicit Subspace Mapping for Attribute-Aware Retrieval-Augmented Generation," January 2026.';
+		const pub2026aLines = addWrappedText(pub2026a, margin, yPosition, pageWidth - 2 * margin);
+		yPosition += pub2026aLines;
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('[Abstract]', margin, yPosition, {url: 'https://arrivaldwis.github.io/assets/documents/PRISM__Personalized_Retrieval_via_Implicit_Subspace_Mapping_for_Attribute_Aware_Retrieval_Augmented_Generation.pdf'});
+		doc.setTextColor(150, 150, 150);
+		doc.text('[In review]', margin + 28, yPosition);
+		doc.setTextColor(0, 0, 0);
+		yPosition += lineHeight + 4;
+
 		// 2025 Publications
 		checkPageBreak(50);
 		doc.setFontSize(10);
@@ -808,6 +838,7 @@ function generateCV() {
 		doc.text('• WI1116 Computer Interaction Lab', margin + 5, yPosition);
 		yPosition += 8;
 		
+		checkPageBreak(50);
 		doc.setFont('helvetica', 'bold');
 		doc.text('2024 - 1st Semester - Bandung Institute of Technology', margin, yPosition);
 		yPosition += lineHeight;
