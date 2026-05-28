@@ -558,7 +558,7 @@ function generateCV() {
 		// Bachelor's Degree
 		doc.setFontSize(12);
 		doc.setFont('helvetica', 'bold');
-		doc.text('(Hons) B.Sc. in Computer Science', margin, yPosition);
+		doc.text('B.Sc. in Computer Science', margin, yPosition);
 		yPosition += lineHeight;
 		doc.setFontSize(10);
 		doc.setFont('helvetica', 'normal');
@@ -571,6 +571,20 @@ function generateCV() {
 		doc.textWithLink('Thesis: Self-Learning Personal Financial Assistant Android Application using MVVM Architectural Pattern', margin, yPosition, {url: 'http://dx.doi.org/10.13140/RG.2.2.11845.81125'});
 		doc.setTextColor(0, 0, 0);
 		yPosition += 10;
+
+		// Vocational High School
+		checkPageBreak(30);
+		doc.setFontSize(12);
+		doc.setFont('helvetica', 'bold');
+		doc.text('Vocational in Software Engineering', margin, yPosition);
+		yPosition += lineHeight;
+		doc.setFontSize(10);
+		doc.setFont('helvetica', 'normal');
+		doc.text('Vocational High School 4 Bandung, 2012-2015', margin, yPosition);
+		yPosition += lineHeight;
+		const vocationalDesc = 'Fundamentals of programming in multiple languages, web development (HTML, CSS, JavaScript), mobile app development for Android and iOS, database design and SQL, software engineering best practices and agile methodologies, version control systems (Git), basic networking and IT infrastructure, computer maintenance, and practical experience with industry-standard tools and frameworks.';
+		yPosition += addWrappedText(vocationalDesc, margin, yPosition, pageWidth - 2 * margin);
+		yPosition += 4;
 		
 		// Work Experience
 		checkPageBreak(40);
