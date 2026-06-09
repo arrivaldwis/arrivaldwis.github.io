@@ -1349,7 +1349,7 @@ function buildEuropassPDF(photoData) {
 		var BOTTOM = PH - 18;  // bottom safe zone
 		
 		// Photo dimensions (passport-style, fits within header)
-		var PHOTO_W = 28;
+		var PHOTO_W = 36;
 		var PHOTO_H = 36;
 		
 		// Europass brand colors
