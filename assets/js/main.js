@@ -1349,8 +1349,8 @@ function buildEuropassPDF(photoData) {
 		var BOTTOM = PH - 18;  // bottom safe zone
 		
 		// Photo dimensions (passport-style, preserved aspect ratio)
-		var PHOTO_W = 26;
-		var PHOTO_H = 34;
+		var PHOTO_W = 34;
+		var PHOTO_H = 44;
 		
 		// Europass brand colors
 		var BLUE = [0, 74, 127];
@@ -1494,14 +1494,11 @@ function buildEuropassPDF(photoData) {
 		
 		doc.setTextColor(0, 0, 0);
 		
-		// Photo (right side, top-right corner, passport style with border)
+		// Photo (right side, top-right corner, passport style)
 		if (photoData) {
 			try {
 				var photoX = PW - MR - PHOTO_W;
-				var photoY = 4;
-				// White border around photo
-				doc.setFillColor(255, 255, 255);
-				doc.rect(photoX - 1.5, photoY - 1.5, PHOTO_W + 3, PHOTO_H + 3, 'F');
+				var photoY = 3;
 				doc.addImage(photoData, 'PNG', photoX, photoY, PHOTO_W, PHOTO_H);
 			} catch(e) {
 				console.error('Error adding photo:', e);
@@ -1767,8 +1764,10 @@ function buildEuropassPDF(photoData) {
 		y += 6;
 		
 		// ============================
-		// PERSONAL SKILLS
+		// PERSONAL SKILLS (always on new page)
 		// ============================
+		doc.addPage();
+		y = ML;
 		sectionHeader('Personal Skills');
 		
 		// Languages
@@ -1878,23 +1877,79 @@ function buildEuropassPDF(photoData) {
 		}
 		y += 4;
 		
-		// Publications
-		subheading('Selected Publications');
+		// Publications (all from general CV)
+		subheading('Publications');
 		doc.setFont('helvetica', 'normal');
 		doc.setFontSize(FS_BODY);
 		doc.setTextColor(0, 0, 0);
 		
-		var pubs = [
-			'A. D. Sentosa, "FuseRAG: Parallel Multi-Source Knowledge Fusion for Hybrid Graph-Augmented RAG," May 2026.',
-			'A. D. Sentosa, A. D. Kusumah, J. Widianto, and H. H. Putri, "PRISM: Personalized Retrieval via Implicit Subspace Mapping for Attribute-Aware RAG," Jan 2026.',
-			'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation," ICEEI 2025.',
-			'A. D. Sentosa, A. S. Prihatmanto, et al., "IndoEduBERT: Tailored Multi-Lingual Sentence Embeddings for Indonesian Education," IJEEI 2025.',
-			'Z. Iklima, T. M. Kadarina, K. S. Salamah, and A. D. Sentosa, "Real-time Dental Caries Segmentation with Efficient Deformable U-Net," 2025.'
-		];
+		// 2026
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(FS_SUBTITLE);
+		doc.setTextColor(DARK_BLUE[0], DARK_BLUE[1], DARK_BLUE[2]);
+		doc.text('2026', ML + 8, y);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(FS_SMALL);
+		doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
+		doc.text('(In review)', ML + 22, y);
+		y += 5;
+		doc.setTextColor(0, 0, 0);
 		
-		for (var pi2 = 0; pi2 < pubs.length; pi2++) {
-			bulletItem(pubs[pi2]);
+		var pub2026 = [
+			'A. D. Sentosa, "FuseRAG: Parallel Multi-Source Knowledge Fusion for Hybrid Graph-Augmented Retrieval-Augmented Generation," May 2026.',
+			'A. D. Sentosa, A. D. Kusumah, J. Widianto, and H. H. Putri, "PRISM: Personalized Retrieval via Implicit Subspace Mapping for Attribute-Aware Retrieval-Augmented Generation," January 2026.'
+		];
+		for (var p26 = 0; p26 < pub2026.length; p26++) {
+			bulletItem(pub2026[p26]);
 		}
+		y += 2;
+		
+		// 2025
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(FS_SUBTITLE);
+		doc.setTextColor(DARK_BLUE[0], DARK_BLUE[1], DARK_BLUE[2]);
+		doc.text('2025', ML + 8, y);
+		y += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(FS_SMALL);
+		doc.setTextColor(0, 0, 0);
+		
+		var pub2025 = [
+			'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation in Automated Evaluation Systems," Accepted at ICEEI 2025.',
+			'A. D. Sentosa, A. S. Prihatmanto, N. Lestari, D. Tresnawati, and A. Zakiah, "IndoEduBERT: Tailored Multi-Lingual and Multi-Grained Sentence Embeddings for the Indonesian Education Domain," Accepted at ICEEI 2025.',
+			'Z. Iklima, T. M. Kadarina, K. S. Salamah, and A. D. Sentosa, "Real-time dental caries segmentation with an efficient Deformable U-Net (DU-Net) for teledentistry system," February 2025.'
+		];
+		for (var p25 = 0; p25 < pub2025.length; p25++) {
+			bulletItem(pub2025[p25]);
+		}
+		y += 2;
+		
+		// 2022
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(FS_SUBTITLE);
+		doc.setTextColor(DARK_BLUE[0], DARK_BLUE[1], DARK_BLUE[2]);
+		doc.text('2022', ML + 8, y);
+		y += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(FS_SMALL);
+		doc.setTextColor(0, 0, 0);
+		
+		var pub2022 = 'A. D. Sentosa and N. P. Utama, "Predicting the Risk of White Spot Syndrome Virus in Shrimp with a Machine Learning and Expert Knowledge Approach," Master\'s thesis, Bandung Institute of Technology, April 2022.';
+		bulletItem(pub2022);
+		y += 2;
+		
+		// 2019
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(FS_SUBTITLE);
+		doc.setTextColor(DARK_BLUE[0], DARK_BLUE[1], DARK_BLUE[2]);
+		doc.text('2019', ML + 8, y);
+		y += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(FS_SMALL);
+		doc.setTextColor(0, 0, 0);
+		
+		var pub2019 = 'A. D. Sentosa, M. Sadikin, and Z. Hong, "Self-Learning Personal Financial Assistant Android Application using MVVM Architectural Pattern," Indonesian Journal of Electrical Engineering and Informatics (IJEEI), vol. 31, pp. 17-25, September 2019.';
+		bulletItem(pub2019);
 		
 		// ============================
 		// FOOTER on all pages
