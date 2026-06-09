@@ -1348,9 +1348,9 @@ function buildEuropassPDF(photoData) {
 		var CW = PW - ML - MR; // content width = 174
 		var BOTTOM = PH - 18;  // bottom safe zone
 		
-		// Photo dimensions (passport-style, preserved aspect ratio)
-		var PHOTO_W = 34;
-		var PHOTO_H = 44;
+		// Photo dimensions (passport-style, fits within header)
+		var PHOTO_W = 28;
+		var PHOTO_H = 36;
 		
 		// Europass brand colors
 		var BLUE = [0, 74, 127];
