@@ -529,6 +529,20 @@ His long-term goal is to advance practical and ethical AI for public safety and 
 								</span>
 							</div>
 						</div>
+
+						<div class="row mt-3 language">
+							<h2 
+								data-en="Software Engineering (Vocational High School)">
+							</h2>
+							<div class="trnsf-thin" 
+								data-en="Vocational High School 4 Bandung, 2012-2015">
+							</div>
+
+							<p class="mt-1 justify"
+								data-en="
+								Comprehensive vocational training in software engineering, covering programming fundamentals, database management, web development, networking, and system administration. Developed strong foundations in software development practices and collaborative project work.">
+							</p>
+						</div>
 					</div>
 				</div>
 
@@ -1866,6 +1880,43 @@ November 2013</span>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.5/purify.min.js"></script>
 		<script src="assets/js/main.js"></script>
+
+		<!-- CV Format Selection Modal -->
+		<div class="modal fade" id="cvFormatModal" tabindex="-1" aria-labelledby="cvFormatModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="cvFormatModalLabel">
+							<i class="ai ai-cv me-2"></i>Download CV
+						</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p class="mb-3 text-muted">Choose a CV format to download:</p>
+						<div class="d-grid gap-3">
+							<button type="button" class="btn btn-outline-primary text-start cv-format-btn" id="downloadGeneralCV">
+								<div class="d-flex align-items-center">
+									<i class="fa-solid fa-file-lines fa-2x me-3 text-primary"></i>
+									<div>
+										<strong>General Format</strong>
+										<div class="text-muted small">Standard academic CV layout</div>
+									</div>
+								</div>
+							</button>
+							<button type="button" class="btn btn-outline-primary text-start cv-format-btn" id="downloadEuropassCV">
+								<div class="d-flex align-items-center">
+									<i class="fa-solid fa-id-card fa-2x me-3 text-primary"></i>
+									<div>
+										<strong>Europass Model CV</strong>
+										<div class="text-muted small">Official Europass CV format with photo &amp; structured sections</div>
+									</div>
+								</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 
 </html>

@@ -314,10 +314,27 @@ $(document).ready(function(){
 		toastr.success('Citation copied');
 	});
 
-	// Handle CV Download
+	// Handle CV Download - Show format selection modal
 	$('#downloadCV').click(function(e) {
 		e.preventDefault();
-		generateCV();
+		var cvFormatModal = new bootstrap.Modal(document.getElementById('cvFormatModal'));
+		cvFormatModal.show();
+	});
+
+	// Handle General CV Download
+	$('#downloadGeneralCV').click(function(e) {
+		e.preventDefault();
+		var modal = bootstrap.Modal.getInstance(document.getElementById('cvFormatModal'));
+		modal.hide();
+		setTimeout(function() { generateCV(); }, 300);
+	});
+
+	// Handle Europass CV Download
+	$('#downloadEuropassCV').click(function(e) {
+		e.preventDefault();
+		var modal = bootstrap.Modal.getInstance(document.getElementById('cvFormatModal'));
+		modal.hide();
+		setTimeout(function() { generateEuropassCV(); }, 300);
 	});
 
 	// Controls the URL; if it has '#blog'
@@ -570,6 +587,20 @@ function generateCV() {
 		doc.setTextColor(0, 0, 255);
 		doc.textWithLink('Thesis: Self-Learning Personal Financial Assistant Android Application using MVVM Architectural Pattern', margin, yPosition, {url: 'http://dx.doi.org/10.13140/RG.2.2.11845.81125'});
 		doc.setTextColor(0, 0, 0);
+		yPosition += lineHeight + 8;
+		
+		// High School Diploma
+		checkPageBreak(25);
+		doc.setFontSize(12);
+		doc.setFont('helvetica', 'bold');
+		doc.text('Software Engineering (Vocational High School)', margin, yPosition);
+		yPosition += lineHeight;
+		doc.setFontSize(10);
+		doc.setFont('helvetica', 'normal');
+		doc.text('Vocational High School 4 Bandung, 2012-2015', margin, yPosition);
+		yPosition += lineHeight;
+		const highSchoolDesc = 'Comprehensive vocational training in software engineering, covering programming fundamentals, database management, web development, networking, and system administration.';
+		yPosition += addWrappedText(highSchoolDesc, margin, yPosition, pageWidth - 2 * margin);
 		yPosition += 10;
 		
 		// Work Experience
@@ -1239,5 +1270,596 @@ function generateCV() {
 	} catch (error) {
 		console.error('Error generating CV:', error);
 		toastr.error('Error generating CV. Please try again.');
+	}
+}
+
+// Europass CV Generation Function
+function generateEuropassCV() {
+	toastr.info('Generating Europass CV... Please wait.');
+	
+	// Load the photo first, then generate the CV
+	var img = new Image();
+	img.crossOrigin = 'anonymous';
+	img.onload = function() {
+		try {
+			// Convert image to base64
+			var canvas = document.createElement('canvas');
+			canvas.width = img.naturalWidth;
+			canvas.height = img.naturalHeight;
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(img, 0, 0);
+			var photoData = canvas.toDataURL('image/jpeg', 0.95);
+			buildEuropassPDF(photoData);
+		} catch(e) {
+			console.error('Error processing photo:', e);
+			toastr.warning('Photo could not be loaded. Generating CV without photo...');
+			buildEuropassPDF(null);
+		}
+	};
+	img.onerror = function() {
+		console.error('Failed to load photo');
+		toastr.warning('Photo could not be loaded. Generating CV without photo...');
+		buildEuropassPDF(null);
+	};
+	img.src = 'assets/img/ArrivalDwiSentosa-2.webp';
+}
+
+function buildEuropassPDF(photoData) {
+	try {
+		const { jsPDF } = window.jspdf;
+		const doc = new jsPDF('p', 'mm', 'a4');
+		
+		const pageWidth = doc.internal.pageSize.getWidth();
+		const pageHeight = doc.internal.pageSize.getHeight();
+		const margin = 15;
+		const contentWidth = pageWidth - 2 * margin;
+		let yPosition = margin;
+		
+		// Europass Blue Color
+		const blueColor = [0, 74, 127]; // #004A7F
+		const lightBlueColor = [220, 235, 250]; // #DCEBFA
+		const grayColor = [100, 100, 100];
+		
+		// Helper function to check page break
+		function checkPageBreak(requiredSpace = 20) {
+			if (yPosition + requiredSpace > pageHeight - margin) {
+				doc.addPage();
+				yPosition = margin;
+			}
+		}
+		
+		// Helper function to add wrapped text
+		function addWrappedText(text, x, y, maxWidth, fontSize = 10) {
+			doc.setFontSize(fontSize);
+			var lines = doc.splitTextToSize(text, maxWidth);
+			doc.text(lines, x, y);
+			return lines.length * 4.5;
+		}
+		
+		// Helper function to add Europass section header (blue bar)
+		function addEuropassSectionHeader(title) {
+			checkPageBreak(15);
+			// Blue background bar
+			doc.setFillColor(blueColor[0], blueColor[1], blueColor[2]);
+			doc.rect(margin, yPosition - 4, contentWidth, 8, 'F');
+			// White text
+			doc.setFontSize(11);
+			doc.setFont('helvetica', 'bold');
+			doc.setTextColor(255, 255, 255);
+			doc.text(title, margin + 3, yPosition + 1);
+			doc.setTextColor(0, 0, 0);
+			yPosition += 10;
+		}
+		
+		// Helper function to add a field label-value pair
+		function addField(label, value, labelWidth = 35) {
+			doc.setFont('helvetica', 'bold');
+			doc.setFontSize(9);
+			doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+			doc.text(label, margin + 2, yPosition);
+			doc.setFont('helvetica', 'normal');
+			doc.setFontSize(10);
+			doc.setTextColor(0, 0, 0);
+			doc.text(value, margin + labelWidth, yPosition);
+			yPosition += 5;
+		}
+		
+		// ===== HEADER SECTION =====
+		// Blue header bar
+		doc.setFillColor(blueColor[0], blueColor[1], blueColor[2]);
+		doc.rect(0, 0, pageWidth, 40, 'F');
+		
+		// Name
+		doc.setFontSize(22);
+		doc.setFont('helvetica', 'bold');
+		doc.setTextColor(255, 255, 255);
+		doc.text('Arrival Dwi Sentosa', margin, 18);
+		
+		// Job Title
+		doc.setFontSize(11);
+		doc.setFont('helvetica', 'normal');
+		doc.text('Lecturer of Informatics | AI/ML Researcher', margin, 28);
+		
+		// Photo (right side of header)
+		if (photoData) {
+			try {
+				var photoWidth = 28;
+				var photoHeight = 35;
+				doc.addImage(photoData, 'JPEG', pageWidth - margin - photoWidth, 3, photoWidth, photoHeight);
+			} catch(e) {
+				console.error('Error adding photo to PDF:', e);
+			}
+		}
+		
+		doc.setTextColor(0, 0, 0);
+		yPosition = 48;
+		
+		// ===== PERSONAL INFORMATION =====
+		addEuropassSectionHeader('Personal Information');
+		
+		// Create two-column personal info layout
+		var leftCol = margin + 2;
+		var rightCol = pageWidth / 2 + 5;
+		var colWidth = (contentWidth - 10) / 2;
+		
+		// Left column
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('First name / Surname:', leftCol, yPosition);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('Arrival Dwi Sentosa', leftCol, yPosition + 5);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Address:', leftCol, yPosition + 12);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('Bandung, Indonesia', leftCol, yPosition + 17);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Telephone:', leftCol, yPosition + 24);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('-', leftCol, yPosition + 29);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Email:', leftCol, yPosition + 36);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('arrivaldwi@itb.ac.id', leftCol, yPosition + 41);
+		
+		// Right column
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Nationality:', rightCol, yPosition);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('Indonesian', rightCol, yPosition + 5);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Date of birth:', rightCol, yPosition + 12);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('-', rightCol, yPosition + 17);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Gender:', rightCol, yPosition + 24);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('Male', rightCol, yPosition + 29);
+		
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Website:', rightCol, yPosition + 36);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('arrivaldwis.github.io', rightCol, yPosition + 41, {url: 'https://arrivaldwis.github.io'});
+		doc.setTextColor(0, 0, 0);
+		
+		// LinkedIn
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('LinkedIn:', rightCol, yPosition + 48);
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('linkedin.com/in/arrivaldwisentosa', rightCol, yPosition + 53, {url: 'https://www.linkedin.com/in/arrivaldwisentosa/'});
+		doc.setTextColor(0, 0, 0);
+		
+		yPosition += 60;
+		
+		// ===== WORK EXPERIENCE =====
+		addEuropassSectionHeader('Work Experience');
+		
+		const europassWork = [
+			{
+				period: '07/2023 – present',
+				title: 'Lecturer',
+				employer: 'Bandung Institute of Technology',
+				location: 'Bandung, Indonesia',
+				description: 'Informatics lecturer at ITB, Research group Informatics. Lecturing for Informatics undergraduate students.'
+			},
+			{
+				period: '04/2024 – present',
+				title: 'Coordinator of AI Development',
+				employer: 'PT Neuronworks Indonesia',
+				location: 'Bandung, Indonesia',
+				description: 'Coordinator of AI Development, focusing on AI/ML research, development, and application.'
+			},
+			{
+				period: '01/2023 – present',
+				title: 'National Jury Team for WorldSkills Indonesia',
+				employer: 'WorldSkills Indonesia',
+				location: 'Field: IT Software Solution for Business',
+				description: 'Jury team for WorldSkills competition. Responsible for preparing competitors, creating problem statements, developing solutions, and presenting solutions following WorldSkills International standard.'
+			},
+			{
+				period: '02/2024 – 05/2024',
+				title: 'Tech and AI Lead',
+				employer: 'Sustainable Living Lab',
+				location: 'AI Team',
+				description: 'Led the research and development of two domain-specific Retrieval-Augmented Generation (RAG) systems focused on sustainability. Architected end-to-end RAG pipelines integrating vector databases and LLM orchestration using LangChain and FastAPI.'
+			},
+			{
+				period: '04/2022 – 05/2023',
+				title: 'Part-Time Lecturer',
+				employer: 'Universitas Multimedia Nusantara',
+				location: 'Fakultas Teknik dan Informatika',
+				description: 'Lecturing 4 subjects including Expert System, Artificial Intelligence, Algorithm and Data Structure and Deep Learning for undergraduate students.'
+			},
+			{
+				period: '02/2022 – 12/2022',
+				title: 'Manager of Data and Information Kampus Merdeka',
+				employer: 'Kementerian Pendidikan dan Kebudayaan',
+				location: '',
+				description: 'Product Manager of 4 different programs in Ministry Education initiative (Praktisi Mengajar, Kampus Mengajar, Cerita Kampus Merdeka, IISMA). Managing relationships with stakeholders and the developer team.'
+			},
+			{
+				period: '07/2017 – 08/2022',
+				title: 'Co-Founder and CTO',
+				employer: 'PT Transformasi Digital Laut',
+				location: '',
+				description: 'Building tech infrastructure for an aquaculture startup "Sgara". Managed tech team of 5 members. Built more than 5 platforms (SgaraBook, SgaraHub, SgaraHatchery, SgaraSupply, SgaraERP).'
+			},
+			{
+				period: '06/2020 – 09/2020',
+				title: 'Senior Mobile Developer',
+				employer: 'VE Capital Asia Pte Ltd',
+				location: '',
+				description: 'Mobile developer building projects for Android and iOS with Flutter, React and Go. Successfully built 3 apps for clients in 3 months with a 3-member team.'
+			},
+			{
+				period: '09/2017 – 01/2020',
+				title: 'Co-Founder and Global Lead Technology',
+				employer: 'Indonesia Diaspora Connect',
+				location: '',
+				description: 'Building tech platform for Indonesian diaspora. 1st Winner Alcatel Lucent Hackathon 2018.'
+			},
+			{
+				period: '06/2018 – 06/2019',
+				title: 'Deputy Director of Media and Technology',
+				employer: 'Perhimpunan Pelajar Indonesia Tiongkok',
+				location: '',
+				description: 'Building social channels and platforms for Indonesian students in China. Built "One data portal" for Indonesian students in China.'
+			},
+			{
+				period: '09/2017 – 01/2018',
+				title: 'Android Developer',
+				employer: 'MEKAR.ID',
+				location: '',
+				description: 'Building Peer-to-Peer Lending Apps "MEKAR". Implemented Firebase, Firestore, MVVM, Dagger and Retrofit.'
+			},
+			{
+				period: '05/2015 – 07/2015',
+				title: 'Android Developer',
+				employer: 'PT. Iman Teknologi Informasi',
+				location: '',
+				description: 'Building secure end-to-end encryption chat apps "PesanKita" (now "Palapa").'
+			},
+			{
+				period: '07/2014 – 09/2014',
+				title: 'Android & iOS Developer',
+				employer: 'PT. GITS Indonesia',
+				location: '',
+				description: 'Building iOS and Android apps with native technology. Handled projects for Tiket.com.'
+			},
+			{
+				period: '10/2013 – 11/2013',
+				title: 'Web Developer – Back End Laravel Framework',
+				employer: 'Yoqiza Interactive',
+				location: '',
+				description: 'Building back-end for startup e-commerce using Laravel 4.'
+			}
+		];
+		
+		doc.setFontSize(9);
+		for (let exp of europassWork) {
+			checkPageBreak(20);
+			
+			// Period (left side, bold)
+			doc.setFont('helvetica', 'bold');
+			doc.setTextColor(0, 0, 0);
+			doc.text(exp.period, margin + 2, yPosition);
+			
+			// Title and Employer (right side)
+			doc.setFont('helvetica', 'bold');
+			doc.text(exp.title, margin + 42, yPosition);
+			yPosition += 4;
+			
+			doc.setFont('helvetica', 'normal');
+			doc.setFontSize(9);
+			doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+			var employerLine = exp.employer;
+			if (exp.location) employerLine += ' | ' + exp.location;
+			doc.text(employerLine, margin + 42, yPosition);
+			yPosition += 4;
+			
+			doc.setTextColor(0, 0, 0);
+			yPosition += addWrappedText(exp.description, margin + 42, yPosition, contentWidth - 40, 9);
+			yPosition += 4;
+		}
+		
+		// ===== EDUCATION AND TRAINING =====
+		addEuropassSectionHeader('Education and Training');
+		
+		// Master's
+		checkPageBreak(25);
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(0, 0, 0);
+		doc.text('08/2019 – 04/2022', margin + 2, yPosition);
+		doc.text('M.Sc. in Intelligent Systems', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Bandung Institute of Technology | Bandung, Indonesia', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setTextColor(0, 0, 0);
+		var masterDesc = 'Developed diverse machine learning models for Computer Vision, with emphasis on optimizing algorithms and loss functions for neural networks. Specialized in object detection methodologies (YOLO v3-v8). Applied AI models to embedded systems using Keras, TensorFlow, PyTorch.';
+		yPosition += addWrappedText(masterDesc, margin + 42, yPosition, contentWidth - 40, 9);
+		doc.setFont('helvetica', 'italic');
+		doc.setFontSize(9);
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('Thesis: Predicting the Risk of White Spot Syndrome Virus in Shrimp with a Machine Learning and Expert Knowledge Approach', margin + 42, yPosition, {url: 'https://digilib.itb.ac.id/gdl/view/63071'});
+		doc.setTextColor(0, 0, 0);
+		yPosition += 8;
+		
+		// Bachelor's
+		checkPageBreak(25);
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(0, 0, 0);
+		doc.text('09/2015 – 07/2019', margin + 2, yPosition);
+		doc.text('B.Sc. in Computer Science', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Beijing Institute of Technology | Beijing, China', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setTextColor(0, 0, 0);
+		var bachelorDesc = 'Comprehensive study in data structures, algorithms, databases, parallel programming, computer architecture, networks, operating systems, and mobile app development. Extraordinary Award for Best Academic Record.';
+		yPosition += addWrappedText(bachelorDesc, margin + 42, yPosition, contentWidth - 40, 9);
+		doc.setFont('helvetica', 'italic');
+		doc.setFontSize(9);
+		doc.setTextColor(0, 0, 255);
+		doc.textWithLink('Thesis: Self-Learning Personal Financial Assistant Android Application using MVVM Architectural Pattern', margin + 42, yPosition, {url: 'http://dx.doi.org/10.13140/RG.2.2.11845.81125'});
+		doc.setTextColor(0, 0, 0);
+		yPosition += 8;
+		
+		// High School
+		checkPageBreak(20);
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(9);
+		doc.setTextColor(0, 0, 0);
+		doc.text('07/2012 – 05/2015', margin + 2, yPosition);
+		doc.text('Software Engineering (Vocational High School)', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+		doc.text('Vocational High School 4 Bandung | Bandung, Indonesia', margin + 42, yPosition);
+		yPosition += 4;
+		doc.setTextColor(0, 0, 0);
+		var highSchoolDesc = 'Comprehensive vocational training in software engineering, covering programming fundamentals, database management, web development, networking, and system administration.';
+		yPosition += addWrappedText(highSchoolDesc, margin + 42, yPosition, contentWidth - 40, 9);
+		yPosition += 8;
+		
+		// ===== PERSONAL SKILLS =====
+		addEuropassSectionHeader('Personal Skills');
+		
+		// Languages
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.setTextColor(0, 0, 0);
+		doc.text('Languages', margin + 2, yPosition);
+		yPosition += 5;
+		
+		doc.setFontSize(9);
+		// Language table
+		doc.setFont('helvetica', 'bold');
+		doc.text('Language', margin + 5, yPosition);
+		doc.text('Understanding', margin + 50, yPosition);
+		doc.text('Speaking', margin + 90, yPosition);
+		doc.text('Writing', margin + 130, yPosition);
+		yPosition += 4;
+		doc.line(margin + 2, yPosition, pageWidth - margin - 2, yPosition);
+		yPosition += 4;
+		
+		doc.setFont('helvetica', 'normal');
+		doc.text('Indonesian', margin + 5, yPosition);
+		doc.text('Native', margin + 55, yPosition);
+		doc.text('Native', margin + 95, yPosition);
+		doc.text('Native', margin + 135, yPosition);
+		yPosition += 5;
+		
+		doc.text('English', margin + 5, yPosition);
+		doc.text('C1 - Advanced', margin + 50, yPosition);
+		doc.text('C1 - Advanced', margin + 90, yPosition);
+		doc.text('C1 - Advanced', margin + 130, yPosition);
+		yPosition += 5;
+		
+		doc.text('Chinese (Mandarin)', margin + 5, yPosition);
+		doc.text('B2 - Upper Intermediate', margin + 50, yPosition);
+		doc.text('B1 - Intermediate', margin + 90, yPosition);
+		doc.text('A2 - Elementary', margin + 130, yPosition);
+		yPosition += 5;
+		
+		doc.text('Japanese', margin + 5, yPosition);
+		doc.text('A2 - Elementary', margin + 50, yPosition);
+		doc.text('A2 - Elementary', margin + 90, yPosition);
+		doc.text('A1 - Beginner', margin + 130, yPosition);
+		yPosition += 8;
+		
+		// Communication skills
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Communication skills', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		yPosition += addWrappedText('Experienced public speaker and educator. Conducted numerous workshops, guest lectures, and technical presentations at universities and industry conferences. Active YouTube content creator with a channel focused on AI and programming tutorials.', margin + 5, yPosition, contentWidth - 10, 9);
+		yPosition += 5;
+		
+		// Organisational / managerial skills
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Organisational / managerial skills', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		yPosition += addWrappedText('Co-Founder and CTO experience at PT Transformasi Digital Laut. Manager of Data and Information at Kementerian Pendidikan dan Kebudayaan. Coordinated AI development teams and managed stakeholder relationships across multiple national programs.', margin + 5, yPosition, contentWidth - 10, 9);
+		yPosition += 5;
+		
+		// Digital competence
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Digital competence', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		doc.text('• AI/ML Frameworks: TensorFlow, PyTorch, Keras, Scikit-learn', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Programming Languages: Python, Java, Kotlin, Dart, C++, JavaScript', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Web Technologies: Flask, FastAPI, LangChain, React, AngularJS', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Mobile Development: Android (Java/Kotlin), iOS (Swift), Flutter', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Cloud & DevOps: Docker, Firebase, Google Cloud Platform', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Databases: PostgreSQL, MongoDB, SQLite, Firebase Firestore', margin + 5, yPosition);
+		yPosition += 8;
+		
+		// Driving licence
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Other skills', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		doc.text('• WorldSkills Competition Judge (IT Software Solution for Business)', margin + 5, yPosition);
+		yPosition += 4.5;
+		doc.text('• Google, GoTo, Traveloka Bangkit Academy AI/ML Instructor', margin + 5, yPosition);
+		yPosition += 8;
+		
+		// ===== ADDITIONAL INFORMATION =====
+		addEuropassSectionHeader('Additional Information');
+		
+		// Honours and Awards (key ones)
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Honours and Awards', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		
+		const keyAwards = [
+			'The Rising Star Contributors - AI/ML Instructor at Bangkit Academy (Aug 2024)',
+			'Tangsel ICT Awards - AI for shrimp disease detection (Nov 2023)',
+			'Battle of Minds - AI for shrimp disease detection (Sep 2021)',
+			'Extraordinary Award - Best Computer Science Academic Record, B.Sc. (Nov 2019)',
+			'Beasiswa Unggulan Awardee - Full government scholarship for master\'s degree (Aug 2019)',
+			'Alcatel Lucent Enterprise Hackathon - 1st Winner (Sep 2018)',
+			'WorldSkills Competition Abu Dhabi - IT Software Solution for Business (Oct 2017)',
+			'Samsung Indonesia Next Apps 4.0 - Samsung SDK Challenge Winner (Oct 2017)',
+			'IBM Bluemix Challenge - Mom with technology (Dec 2016)',
+			'ASEAN Skills Competition Kuala Lumpur - IT Software Solution for Business (Oct 2016)',
+			'Indonesian Skills Competition - IT Software applications (Aug 2014)',
+			'Indonesia ICT Awards - Antivirus application (Sep 2013)',
+			'Indosat Inspiring Youth and Women - Antivirus application (Dec 2012)',
+			'West Java ICT Awards - Antivirus application (Sep 2011)'
+		];
+		
+		for (let award of keyAwards) {
+			checkPageBreak(8);
+			doc.text('• ' + award, margin + 5, yPosition);
+			yPosition += 4.5;
+		}
+		yPosition += 5;
+		
+		// Publications (selected)
+		doc.setFont('helvetica', 'bold');
+		doc.setFontSize(10);
+		doc.text('Selected Publications', margin + 2, yPosition);
+		yPosition += 5;
+		doc.setFont('helvetica', 'normal');
+		doc.setFontSize(9);
+		
+		const keyPubs = [
+			'A. D. Sentosa, "FuseRAG: Parallel Multi-Source Knowledge Fusion for Hybrid Graph-Augmented Retrieval-Augmented Generation," May 2026.',
+			'A. D. Sentosa, A. D. Kusumah, J. Widianto, and H. H. Putri, "PRISM: Personalized Retrieval via Implicit Subspace Mapping for Attribute-Aware RAG," Jan 2026.',
+			'A. D. Sentosa, J. Widianto, "MACS: A Cognitive Diversity Multi-Agent Consensus Framework for Bias Mitigation," ICEEI 2025.',
+			'A. D. Sentosa, A. S. Prihatmanto, et al., "IndoEduBERT: Tailored Multi-Lingual Sentence Embeddings for Indonesian Education," IJEEI 2019.'
+		];
+		
+		for (let pub of keyPubs) {
+			checkPageBreak(12);
+			yPosition += addWrappedText('• ' + pub, margin + 5, yPosition, contentWidth - 10, 9);
+			yPosition += 1;
+		}
+		
+		// Footer - Europass style
+		const totalPages = doc.internal.getNumberOfPages();
+		for (let i = 1; i <= totalPages; i++) {
+			doc.setPage(i);
+			doc.setFontSize(7);
+			doc.setFont('helvetica', 'normal');
+			doc.setTextColor(grayColor[0], grayColor[1], grayColor[2]);
+			doc.text('Europass CV | Arrival Dwi Sentosa', margin, pageHeight - 8);
+			doc.text('Page ' + i + ' of ' + totalPages, pageWidth - margin - 20, pageHeight - 8);
+			doc.text('Created: ' + new Date().toLocaleDateString(), pageWidth / 2 - 15, pageHeight - 8);
+		}
+		
+		doc.save('Arrival_Dwi_Sentosa_Europass_CV.pdf');
+		toastr.success('Europass CV downloaded successfully!');
+		
+	} catch (error) {
+		console.error('Error generating Europass CV:', error);
+		toastr.error('Error generating Europass CV. Please try again.');
 	}
 }

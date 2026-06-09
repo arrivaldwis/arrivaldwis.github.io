@@ -48,6 +48,26 @@ li > .active {
 	font-weight: 300;
 }
 
+/* CV Format Selection Modal */
+.cv-format-btn {
+	border-width: 2px;
+	transition: all 0.2s ease;
+	padding: 12px 16px;
+}
+.cv-format-btn:hover {
+	background-color: #004A7F;
+	color: #fff;
+	border-color: #004A7F;
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px rgba(0,74,127,0.3);
+}
+.cv-format-btn:hover .fa-2x {
+	color: #fff !important;
+}
+.cv-format-btn:hover .small {
+	color: rgba(255,255,255,0.8) !important;
+}
+
 .trnsf-italic {
 	font-style: italic;
 }
