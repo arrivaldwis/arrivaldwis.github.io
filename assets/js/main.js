@@ -579,7 +579,7 @@ function generateCV() {
 		yPosition += lineHeight;
 		doc.setFontSize(10);
 		doc.setFont('helvetica', 'normal');
-		doc.text('Mercu Buana University and Beijing Institute of Technology, 2015-2019', margin, yPosition);
+		doc.text('Beijing Institute of Technology, 2015-2019', margin, yPosition);
 		yPosition += lineHeight;
 		const bachelorDesc = 'Comprehensive study in data structures, algorithms, databases, parallel programming, computer architecture, networks, operating systems, and mobile app development.';
 		yPosition += addWrappedText(bachelorDesc, margin, yPosition, pageWidth - 2 * margin);
@@ -1723,7 +1723,7 @@ function buildEuropassPDF(photoData) {
 		doc.setFontSize(FS_SMALL);
 		doc.setFont('helvetica', 'normal');
 		doc.setTextColor(GRAY[0], GRAY[1], GRAY[2]);
-		doc.text('Mercu Buana University and Beijing Institute of Technology', detailX, y);
+		doc.text('Beijing Institute of Technology, Beijing, China', detailX, y);
 		y += 4.5;
 		doc.setTextColor(50, 50, 50);
 		doc.setFont('helvetica', 'normal');
